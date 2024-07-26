@@ -25,6 +25,10 @@ int main() {
         Calc::pow pow(2, 3);
         std::cout << pow.get() << std::endl;
 
+        std::cout << "sqrt test sqrt(2)=";
+        Calc::sqrt sqrt(2);
+        std::cout << sqrt.get() << std::endl;
+
         std::cout << "exp test exp(1)=";
         Calc::exp exp(1);
         std::cout << exp.get() << std::endl;
@@ -52,8 +56,8 @@ int main() {
         Calc::calc_tree func2("3*exp(0.5+0.25*2+exp(2))+3/5-2*(2/(4+3)*(1+2/(1+1)))");
         std::cout << func2.get() << std::endl;
 
-        std::cout << "function3: 3*exp(2*3^2+exp(1+2)/2)+2/3=";
-        Calc::calc_tree func3("3*exp(2*3^2+exp(1+2)/2)+2/3");
+        std::cout << "function3: 3*exp(2*3^2+exp(1+2)/2)+2/3*sqrt(2)=";
+        Calc::calc_tree func3("3*exp(2*3^2+exp(1+2)/2)+2/3*sqrt(2)");
         std::cout << func3.get() << std::endl;
     }
     catch(std::exception& e) {

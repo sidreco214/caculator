@@ -117,17 +117,22 @@ class pow : public _op_node {
     double calc();
 };
 
-class exp : public _tree_base {
+class sqrt : public _op_node {
+    public:
+    sqrt() = default;
+    sqrt(double first) {
+        this->first = new num(first);
+    }
+    double calc();
+};
+
+class exp : public _op_node {
     public:
     exp() = default;
     exp(double first) {
         this->first = new num(first);
     }
     double calc();
-    double get() {
-        if(is_caculated()) return value;
-        else               return calc();
-    }
 };
 
 class calc_tree : _tree_base {

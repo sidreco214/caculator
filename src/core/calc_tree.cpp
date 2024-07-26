@@ -80,6 +80,20 @@ double Calc::pow::calc() {
     return this->value;
 }
 
+double Calc::sqrt::calc() {
+    if(!first) {
+        throw std::runtime_error("(Calc::exp) first is nullptr");
+        return 0.0;
+    }
+
+    if(!first->is_caculated()) first->get();
+
+    this->value = std::sqrt(first->get());
+    _is_caulated = true;
+    dispose_child();
+    return this->value;
+}
+
 double Calc::exp::calc() {
     if(!first) {
         throw std::runtime_error("(Calc::exp) first is nullptr");
@@ -120,9 +134,23 @@ _tree_base *Calc::calc_tree::_make_node(std::string str) {
                 return _make_node(str);
             
             case 'e':
+                if(str.length() < 6) break;
                 if(str.substr(0, 4) == std::string("exp(")) {
                     str = str.substr(4, str.length()-5);
                     node = new Calc::exp();
+                    node->first = _make_node(str);
+                    return node;
+                }
+                break;
+            
+            case 's':
+                //is sin()
+
+                //is sqrt()
+                if(str.length() < 7) break;
+                if(str.substr(0, 5) == std::string("sqrt(")) {
+                    str = str.substr(5, str.length()-6);
+                    node = new Calc::sqrt();
                     node->first = _make_node(str);
                     return node;
                 }
@@ -231,7 +259,7 @@ _tree_base *Calc::calc_tree::_make_node(std::string str) {
     std::string::size_type n = 0;
     double value = std::stod(str, &n);
     if(str.length() != n) {
-        std::string msg = std::format("(_make_node) parse error: unknown symbols {}", str.substr(n));
+        std::string msg = std::format("(_make_node) parse error: unknown symbols '{}' in {}", str.substr(n), str);
         throw std::runtime_error(msg);
         return nullptr;
     }
