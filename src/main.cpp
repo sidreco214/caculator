@@ -270,7 +270,7 @@ void CreateBtns(HWND hWnd, RECT& rect, int nrow, int ncol, std::vector<HWND>& bu
         std::pair(L".", (HMENU)BDOT),
         std::pair(L"0", (HMENU)B0),
         std::pair(L"=", (HMENU)BCALC),
-        std::pair(L"/", (HMENU)BADD)
+        std::pair(L"/", (HMENU)BDIV)
     };
 
     HWND hWnd_child;
